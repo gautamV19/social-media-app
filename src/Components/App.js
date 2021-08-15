@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 import { fetchPosts } from '../Action/posts';
-import { PostsList } from './';
+import { PostsList, Navbar } from './';
 
 class App extends Component {
   componentDidMount() {
@@ -16,6 +16,7 @@ class App extends Component {
 
     return (
       <div>
+        <Navbar />
         <PostsList posts={posts} />
       </div>
     );

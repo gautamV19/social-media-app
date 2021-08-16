@@ -23,13 +23,38 @@ export const startLogin = () => {
 
 export const login = (email, password) => {
   return (dispatch) => {
-    const url = urls.login;
+    const url = urls.login();
     fetch(url, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded',
       },
       body: getFormBody({ email, password }),
-    });
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.success) {
+          // dispatch success
+          dispatch(loginSuccess(data.data.user));
+          return;
+        } else {
+          dispatch(loginFailed(data.message));
+          return;
+        }
+      });
+  };
+};
+
+export const loginFailed = (emsg) => {
+  return {
+    type: LOGIN_FAILED,
+    error: emsg,
+  };
+};
+
+export const loginSuccess = (user) => {
+  return {
+    type: LOGIN_SUCCESS,
+    user,
   };
 };

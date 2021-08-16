@@ -1,9 +1,12 @@
 export const getFormBody = (params) => {
   let madeUrl = [];
   for (const key in params) {
-    const encodedKey = encodeURIComponent(params);
+    const encodedKey = encodeURIComponent(key);
     const encodedValue = encodeURIComponent(params[key]);
+    console.log('inside getFormBody', encodedKey, encodedValue);
     madeUrl.push(encodedKey + '=' + encodedValue);
   }
-  return madeUrl.join('&');
+
+  console.log(madeUrl.join('&'));
+  return madeUrl;
 };

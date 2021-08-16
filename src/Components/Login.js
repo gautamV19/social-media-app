@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import handleLogin from '../Action/auth';
+import { login, startLogin } from '../Action/auth';
 
 function mapStateToProps(state) {
-  return {};
+  return {
+    auth: state.auth,
+  };
 }
 
 class Login extends Component {
@@ -16,21 +18,32 @@ class Login extends Component {
       email: '',
       psw: '',
     };
+    const { error, isLoggedIn, isProgress } = this.props.auth;
   }
 
   handleSubmit = (e) => {
     e.preventDefault();
+    this.props.dispatch(startLogin());
     // console.log('this.emailRef', this.emailRef);
     // console.log('this.emailRef', this.emailRef.current.value);
     // console.log('this.pswRef', this.pswRef);
     // console.log('this.pswRef', this.pswRef.current.value);
     console.log('Login State', this.state);
+
+    const { email, psw } = this.state;
+
+    if (email && psw) {
+      this.props.dispatch(login(email, psw));
+    }
   };
 
   render() {
+    const { error, isProgress } = this.props.auth;
+    console.log(isProgress);
     return (
       <form className="login-form">
         <span className="login-signup-header">Log In</span>
+        {error && <div className="alert error-dailog">{error}</div>}
         <div className="field">
           <input
             type="email"
@@ -49,7 +62,19 @@ class Login extends Component {
           />
         </div>
         <div className="field">
-          <button onClick={this.handleSubmit}>Log In</button>
+          {isProgress ? (
+            <button
+              onClick={this.handleSubmit}
+              disabled={isProgress}
+              style={{ backgroundColor: 'green' }}
+            >
+              Logging In...
+            </button>
+          ) : (
+            <button onClick={this.handleSubmit} disabled={isProgress}>
+              Log In
+            </button>
+          )}
         </div>
       </form>
     );

@@ -15,9 +15,9 @@ class Login extends Component {
   handleSubmit = (e) => {
     e.preventDefault();
     console.log('this.emailRef', this.emailRef);
-    console.log('this.emailRef', this.emailRef.current.value);
+    // console.log('this.emailRef', this.emailRef.current.value);
     console.log('this.pswRef', this.pswRef);
-    console.log('this.pswRef', this.pswRef.current.value);
+    // console.log('this.pswRef', this.pswRef.current.value);
   };
 
   render() {

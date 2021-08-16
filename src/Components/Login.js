@@ -25,10 +25,6 @@ class Login extends Component {
     // console.log('this.pswRef', this.pswRef);
     // console.log('this.pswRef', this.pswRef.current.value);
     console.log('Login State', this.state);
-    if (this.state.email && this.state.psw) {
-      console.log('calling handleLogin');
-      handleLogin(this.state.email, this.state.psw);
-    }
   };
 
   render() {

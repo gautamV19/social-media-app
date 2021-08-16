@@ -1,13 +1,15 @@
+import { urls } from '../Helpers/urls';
 import { UPDATE_POSTS } from './actionTypes';
+
 export function fetchPosts() {
   return (dispatch) => {
-    const url = 'https://jsonplaceholder.typicode.com/posts';
+    const url = urls.fetchPosts();
     fetch(url)
       .then((response) => {
         return response.json();
       })
-      .then((posts) => {
-        console.log('My data', posts);
+      .then((jResponse) => {
+        const posts = jResponse.data.posts;
         dispatch(updatePosts(posts));
       });
   };

@@ -8,16 +8,22 @@ function mapStateToProps(state) {
 class Login extends Component {
   constructor(props) {
     super(props);
-    this.emailRef = React.createRef();
-    this.pswRef = React.createRef();
+    // this.emailRef = React.createRef();
+    // this.pswRef = React.createRef();
+
+    this.state = {
+      email: '',
+      psw: '',
+    };
   }
 
   handleSubmit = (e) => {
-    e.preventDefault();
-    console.log('this.emailRef', this.emailRef);
+    // e.preventDefault();
+    // console.log('this.emailRef', this.emailRef);
     // console.log('this.emailRef', this.emailRef.current.value);
-    console.log('this.pswRef', this.pswRef);
+    // console.log('this.pswRef', this.pswRef);
     // console.log('this.pswRef', this.pswRef.current.value);
+    console.log('Login State', this.state);
   };
 
   render() {
@@ -29,7 +35,7 @@ class Login extends Component {
             type="email"
             placeholder="Email"
             required
-            ref={this.emailRef}
+            onChange={(e) => this.setState({ email: e.target.value })}
           />
         </div>
         <div className="field">
@@ -38,6 +44,7 @@ class Login extends Component {
             placeholder="Password"
             required
             ref={this.pswRef}
+            onChange={(e) => this.setState({ psw: e.target.value })}
           />
         </div>
         <div className="field">

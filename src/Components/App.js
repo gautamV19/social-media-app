@@ -26,7 +26,7 @@ class App extends Component {
               return <Home {...props} posts={posts} />;
             }}
           />
-          <Route component={Login} />
+          <Route exact path="/login" component={Login} />
           <Route component={Page404} />
         </Switch>
       </Router>

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import handleLogin from '../Action/auth';
 
 function mapStateToProps(state) {
   return {};
@@ -18,12 +19,16 @@ class Login extends Component {
   }
 
   handleSubmit = (e) => {
-    // e.preventDefault();
+    e.preventDefault();
     // console.log('this.emailRef', this.emailRef);
     // console.log('this.emailRef', this.emailRef.current.value);
     // console.log('this.pswRef', this.pswRef);
     // console.log('this.pswRef', this.pswRef.current.value);
     console.log('Login State', this.state);
+    if (this.state.email && this.state.psw) {
+      console.log('calling handleLogin');
+      handleLogin(this.state.email, this.state.psw);
+    }
   };
 
   render() {

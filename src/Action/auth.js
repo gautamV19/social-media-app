@@ -35,6 +35,7 @@ export const login = (email, password) => {
       .then((data) => {
         if (data.success) {
           // dispatch success
+          localStorage.setItem('token', data.data.token);
           dispatch(loginSuccess(data.data.user));
           return;
         } else {

@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { signingup, signup } from '../Action/signup';
+import { signingup, signup } from '../Action/auth';
 
 const mapStateToProps = (state) => {
   return {
-    signup: state.signupAuth,
+    signup: state.auth,
   };
 };
 

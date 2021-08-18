@@ -6,6 +6,7 @@ import jwtDecode from 'jwt-decode';
 
 import { fetchPosts } from '../Action/posts';
 import { Home, Navbar, Page404, Login, Signup } from './';
+import { authUser } from '../Action/auth';
 
 class App extends Component {
   componentDidMount() {
@@ -16,6 +17,7 @@ class App extends Component {
     if (token) {
       const user = jwtDecode(token);
       console.log('My User', user);
+      this.props.dispatch(authUser(user));
     }
   }
 

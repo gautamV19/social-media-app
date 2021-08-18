@@ -14,3 +14,4 @@ export const SIGNUP_FAILED = 'SIGNUP_FAILED';
 //persisting user
 export const AUTHENTICATE_USER = 'AUTHENTICATE_USER';
 export const LOGOUT = 'LOGOUT';
+export const RESET_AUTH = 'RESET_AUTH';

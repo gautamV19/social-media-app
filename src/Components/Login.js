@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { login, startLogin } from '../Action/auth';
+import { Redirect } from 'react-router-dom';
+import { handleResetAuth, login, startLogin } from '../Action/auth';
 
 function mapStateToProps(state) {
   return {
@@ -40,9 +41,17 @@ class Login extends Component {
     }
   };
 
+  componentWillUnmount() {
+    this.props.dispatch(handleResetAuth());
+  }
+
   render() {
-    const { error, isProgress } = this.props.auth;
+    const { error, isProgress, isLoggedIn } = this.props.auth;
     // console.log(isProgress);
+
+    if (isLoggedIn) {
+      return <Redirect to="/" />;
+    }
     return (
       <form className="login-form">
         <span className="login-signup-header">Log In</span>

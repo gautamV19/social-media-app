@@ -16,6 +16,7 @@ import {
   SIGNUP_FAILED,
   SIGNUP_START,
   SIGNUP_SUCCESS,
+  RESET_AUTH,
 } from '../Action/actionTypes';
 import { urls } from '../Helpers/urls';
 import { getFormBody } from '../Helpers/extraFunctions';
@@ -128,5 +129,11 @@ export const logout = () => {
   localStorage.removeItem('token');
   return {
     type: LOGOUT,
+  };
+};
+
+export const handleResetAuth = () => {
+  return {
+    type: RESET_AUTH,
   };
 };

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { signingup, signup } from '../Action/auth';
+import { Redirect } from 'react-router-dom';
+import { signingup, signup, handleResetAuth } from '../Action/auth';
 
 const mapStateToProps = (state) => {
   return {
@@ -41,9 +42,16 @@ export class Signup extends Component {
     }
   };
 
+  componentWillUnmount() {
+    this.props.dispatch(handleResetAuth());
+  }
+
   render() {
     // console.log('Props of signup', this.props);
-    const { error, isProgress } = this.props.signup;
+    const { error, isProgress, isLoggedIn } = this.props.signup;
+    if (isLoggedIn) {
+      return <Redirect to="/"></Redirect>;
+    }
     return (
       <form className="login-form" onSubmit={this.handleSubmit}>
         <span className="login-signup-header">Sign Up</span>

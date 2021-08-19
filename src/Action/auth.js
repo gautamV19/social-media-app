@@ -17,7 +17,8 @@ import {
   SIGNUP_START,
   SIGNUP_SUCCESS,
   RESET_AUTH,
-  UPDATE_PROFILE,
+  EDIT_USER_SUCCESSFUL,
+  EDIT_USER_FAILED,
 } from '../Action/actionTypes';
 import { urls } from '../Helpers/urls';
 import { getFormBody } from '../Helpers/extraFunctions';
@@ -139,10 +140,57 @@ export const handleResetAuth = () => {
   };
 };
 
-export const updateProfile = (state) => {
-  console.log('inside update profile');
+export const editSuccess = (user) => {
   return {
-    type: UPDATE_PROFILE,
-    state,
+    type: EDIT_USER_SUCCESSFUL,
+    user,
   };
 };
+
+export const editFailed = (error) => {
+  return {
+    type: EDIT_USER_FAILED,
+    error,
+  };
+};
+
+export const updateProfile = (data) => {
+  //{ name, password, confirm_password, id }
+  return (dispatch) => {
+    const url = urls.editUser();
+    fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+        Authorization: `Bearer ${localStorage.getItem('token')}`,
+      },
+      body: getFormBody(data),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
+
+        if (data.success) {
+          const user = data.data.user;
+          dispatch(editSuccess(user));
+          if (data.data.token) {
+            localStorage.setItem('token', data.data.token);
+          }
+          return;
+        }
+
+        dispatch(editFailed(data.data.message));
+      });
+  };
+};
+
+// {
+//     "success": true,
+//     "data": {
+//         "user": {
+//         "_id": "5e33fc7c9cd14572518c16fa",
+//         "name": "thor123",
+//         "email": "thor@gmail.com"
+//         }
+//     }
+// }

@@ -9,6 +9,8 @@ import {
   SIGNUP_SUCCESS,
   RESET_AUTH,
   UPDATE_PROFILE,
+  EDIT_USER_SUCCESSFUL,
+  EDIT_USER_FAILED,
 } from '../Action/actionTypes';
 
 const intialAuthState = {
@@ -61,14 +63,15 @@ export default function auth(state = intialAuthState, action) {
         ...state,
         error: null,
       };
-    case UPDATE_PROFILE:
+
+    case EDIT_USER_SUCCESSFUL:
       return {
         ...state,
-        user: {
-          ...state.user,
-          name: action.state.name,
-          password: action.state.password,
-        },
+        user: action.user,
+      };
+    case EDIT_USER_FAILED:
+      return {
+        ...state,
       };
     default:
       break;

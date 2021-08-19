@@ -4,4 +4,5 @@ export const urls = {
     `${url_root}/posts?page=${page}&limit=${limit}`,
   login: () => `${url_root}/users/login`,
   signupurl: () => `${url_root}/users/signup`,
+  editUser: () => `${url_root}/users/edit`,
 };

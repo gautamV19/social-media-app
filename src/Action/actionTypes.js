@@ -17,4 +17,5 @@ export const LOGOUT = 'LOGOUT';
 export const RESET_AUTH = 'RESET_AUTH';
 
 //updating profile
-export const UPDATE_PROFILE = 'UPDATE_PROFILE';
+export const EDIT_USER_SUCCESSFUL = 'EDIT_USER_SUCCESSFUL';
+export const EDIT_USER_FAILED = 'EDIT_USER_FAILED';

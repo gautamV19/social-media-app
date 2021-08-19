@@ -26,15 +26,19 @@ class Settings extends Component {
     // console.log(this.state);
   }
 
-  saveSettings() {
+  saveSettings = () => {
+    //{ name, password, confirm_password, id }
+
     const { name, password, confirm_password } = this.state;
     if (password !== confirm_password) {
       alert('Please confirm password');
       return;
     }
-
-    this.props.dispatch(updateProfile({ name, password }));
-  }
+    const { id } = this.props.auth.user;
+    this.props.dispatch(
+      updateProfile({ name, password, confirm_password, id })
+    );
+  };
 
   render() {
     const { user } = this.props.auth;

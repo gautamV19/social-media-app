@@ -17,6 +17,7 @@ import {
   SIGNUP_START,
   SIGNUP_SUCCESS,
   RESET_AUTH,
+  UPDATE_PROFILE,
 } from '../Action/actionTypes';
 import { urls } from '../Helpers/urls';
 import { getFormBody } from '../Helpers/extraFunctions';
@@ -135,5 +136,13 @@ export const logout = () => {
 export const handleResetAuth = () => {
   return {
     type: RESET_AUTH,
+  };
+};
+
+export const updateProfile = (state) => {
+  console.log('inside update profile');
+  return {
+    type: UPDATE_PROFILE,
+    state,
   };
 };

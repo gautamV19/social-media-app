@@ -43,7 +43,7 @@ export class Signup extends Component {
   };
 
   componentWillUnmount() {
-    this.props.dispatch(handleResetAuth());
+    this.props.auth.error && this.props.dispatch(handleResetAuth());
   }
 
   render() {

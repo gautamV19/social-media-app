@@ -15,3 +15,6 @@ export const SIGNUP_FAILED = 'SIGNUP_FAILED';
 export const AUTHENTICATE_USER = 'AUTHENTICATE_USER';
 export const LOGOUT = 'LOGOUT';
 export const RESET_AUTH = 'RESET_AUTH';
+
+//updating profile
+export const UPDATE_PROFILE = 'UPDATE_PROFILE';

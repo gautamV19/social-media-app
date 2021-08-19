@@ -10,21 +10,32 @@ import {
 import jwtDecode from 'jwt-decode';
 
 import { fetchPosts } from '../Action/posts';
-import { Home, Navbar, Page404, Login, Signup } from './';
+import { Home, Navbar, Page404, Login, Signup, Settings } from './';
 import { authUser } from '../Action/auth';
 
-const Settings = () => {
-  return <h1>SETTINGS</h1>;
-};
-
 const PrivateRoute = (privateProps) => {
-  const { isLoggedIn, path, component } = privateProps;
+  const { isLoggedIn, path, component: Component } = privateProps;
 
-  if (isLoggedIn) {
-    return <Route exact path={path} component={component} />;
-  } else {
-    return <Redirect to="/login" />;
-  }
+  return (
+    <Route
+      exact
+      path={path}
+      render={(props) => {
+        return isLoggedIn ? (
+          <Component {...props} />
+        ) : (
+          <Redirect
+            to={{
+              pathname: '/login',
+              state: {
+                from: props.location,
+              },
+            }}
+          />
+        );
+      }}
+    />
+  );
 };
 
 class App extends Component {

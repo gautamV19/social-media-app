@@ -42,15 +42,19 @@ class Login extends Component {
   };
 
   componentWillUnmount() {
-    this.props.dispatch(handleResetAuth());
+    this.props.auth.error && this.props.dispatch(handleResetAuth());
   }
 
   render() {
     const { error, isProgress, isLoggedIn } = this.props.auth;
     // console.log(isProgress);
 
+    console.log('Props of login', this.props);
+    const { from } = this.props.location.state || { pathname: '/' };
+    console.log('From', from);
+
     if (isLoggedIn) {
-      return <Redirect to="/" />;
+      return <Redirect to={from} />;
     }
     return (
       <form className="login-form">

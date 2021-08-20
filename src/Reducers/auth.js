@@ -8,7 +8,6 @@ import {
   SIGNUP_START,
   SIGNUP_SUCCESS,
   RESET_AUTH,
-  UPDATE_PROFILE,
   EDIT_USER_SUCCESSFUL,
   EDIT_USER_FAILED,
 } from '../Action/actionTypes';
@@ -68,10 +67,12 @@ export default function auth(state = intialAuthState, action) {
       return {
         ...state,
         user: action.user,
+        error: false,
       };
     case EDIT_USER_FAILED:
       return {
         ...state,
+        error: action.error,
       };
     default:
       break;

@@ -19,3 +19,11 @@ export const RESET_AUTH = 'RESET_AUTH';
 //updating profile
 export const EDIT_USER_SUCCESSFUL = 'EDIT_USER_SUCCESSFUL';
 export const EDIT_USER_FAILED = 'EDIT_USER_FAILED';
+
+//geting userProfile
+export const USER_PROFILE_SUCCESS = 'USER_PROFILE_SUCCESS';
+export const USER_PROFILE_FAILED = 'USER_PROFILE_FAILED';
+export const USER_PROFILE_START = 'USER_PROFILE_START';
+
+//Add friend
+export const ADD_FRIEND = 'ADD_FRIEND';

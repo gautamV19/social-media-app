@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { updateProfile } from '../Action/auth';
+import { handleResetAuth, updateProfile } from '../Action/auth';
 
 function mapStateToProps(state) {
   return {
@@ -34,14 +34,18 @@ class Settings extends Component {
       alert('Please confirm password');
       return;
     }
-    const { id } = this.props.auth.user;
+    const _id = this.props.auth.user._id;
     this.props.dispatch(
-      updateProfile({ name, password, confirm_password, id })
+      updateProfile({ name, password, confirm_password, _id })
     );
   };
 
+  componentWillUnmount() {
+    this.props.dispatch(handleResetAuth());
+  }
+
   render() {
-    const { user } = this.props.auth;
+    const { user, error } = this.props.auth;
     const { editmode, name, password, confirm_password } = this.state;
     return (
       <div className="settings">
@@ -52,7 +56,10 @@ class Settings extends Component {
             id="user-dp"
           />
         </div>
-
+        {error && <div className="alert error-dialog">{error}</div>}
+        {error === false && (
+          <div className="alert success-dialog">{'Profile updated!!!'}</div>
+        )}
         <div className="field">
           <div className="field-lable">Email</div>
           <div className="field-value">{user.email}</div>
@@ -64,7 +71,7 @@ class Settings extends Component {
             <input
               type="text"
               onChange={(e) => this.handleChange('name', e.target.value)}
-              value={this.state.name}
+              value={name}
             />
           ) : (
             <div className="field-value">{user.name}</div>
@@ -77,7 +84,7 @@ class Settings extends Component {
             <input
               type="text"
               onChange={(e) => this.handleChange('password', e.target.value)}
-              value={this.state.password}
+              value={password}
             />
           </div>
         )}
@@ -90,7 +97,7 @@ class Settings extends Component {
               onChange={(e) =>
                 this.handleChange('confirm_password', e.target.value)
               }
-              value={this.state.confirm_password}
+              value={confirm_password}
             />
           </div>
         )}

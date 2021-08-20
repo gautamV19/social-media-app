@@ -10,3 +10,7 @@ export const getFormBody = (params) => {
   // console.log(madeUrl.join('&'));
   return madeUrl.join('&');
 };
+
+export const getToken = () => {
+  return localStorage.getItem('token');
+};

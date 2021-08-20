@@ -21,7 +21,7 @@ import {
   EDIT_USER_FAILED,
 } from '../Action/actionTypes';
 import { urls } from '../Helpers/urls';
-import { getFormBody } from '../Helpers/extraFunctions';
+import { getFormBody, getToken } from '../Helpers/extraFunctions';
 
 export const startLogin = () => {
   return {
@@ -75,8 +75,43 @@ export const signingup = () => {
   };
 };
 
+// export function signup(name, email, password, confirm_password) {
+//   return (dispatch) => {
+//     const url = urls.signupurl();
+//     fetch(url, {
+//       method: 'POST',
+//       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+//       body: getFormBody({ email, password, confirm_password, name }),
+//     })
+//       .then((response) => response.json())
+//       .then((data) => {
+//         console.log(data);
+//         if (data.success) {
+//           localStorage.setItem('token', data.data.token);
+//           dispatch(signupSuccessful(data.data.user));
+//           return;
+//         }
+//         dispatch(signupFailed(data.message));
+//       });
+//   };
+// }
+
+export const signupSuccessful = (user) => {
+  return {
+    type: SIGNUP_SUCCESS,
+    user,
+  };
+};
+
+export const signupFailed = (error) => {
+  return {
+    type: SIGNUP_FAILED,
+    error,
+  };
+};
+
 export const signup = (data) => {
-  // console.log('Inside action signin', data);
+  console.log('Inside action signin', data);
   return (dispatch) => {
     const url = urls.signupurl();
     fetch(url, {
@@ -101,27 +136,13 @@ export const signup = (data) => {
   };
 };
 
-export const signupSuccessful = (user) => {
-  return {
-    type: SIGNUP_SUCCESS,
-    user,
-  };
-};
-
-export const signupFailed = (error) => {
-  return {
-    type: SIGNUP_FAILED,
-    error,
-  };
-};
-
 //Persisting user
 export const authUser = (user) => {
   return {
     type: AUTHENTICATE_USER,
     user: {
       email: user.email,
-      _id: user.id,
+      _id: user._id,
       name: user.name,
     },
   };
@@ -162,24 +183,21 @@ export const updateProfile = (data) => {
       method: 'POST',
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded',
-        Authorization: `Bearer ${localStorage.getItem('token')}`,
+        Authorization: 'Bearer ' + getToken(),
       },
       body: getFormBody(data),
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
-
+        console.log('EDIT USER PROFILE DATA', data);
         if (data.success) {
-          const user = data.data.user;
-          dispatch(editSuccess(user));
+          dispatch(editSuccess(data.data.user));
           if (data.data.token) {
             localStorage.setItem('token', data.data.token);
           }
           return;
         }
-
-        dispatch(editFailed(data.data.message));
+        dispatch(editFailed(data.message));
       });
   };
 };

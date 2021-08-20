@@ -16,7 +16,7 @@ class Navbar extends Component {
   render() {
     const { auth } = this.props;
     const user = auth.user;
-    console.log('Navbar props', this.props);
+    // console.log('Navbar props', this.props);
     return (
       <nav className="nav">
         <div className="left-div">

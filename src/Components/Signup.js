@@ -5,7 +5,7 @@ import { signingup, signup, handleResetAuth } from '../Action/auth';
 
 const mapStateToProps = (state) => {
   return {
-    signup: state.auth,
+    auth: state.auth,
   };
 };
 
@@ -48,7 +48,7 @@ export class Signup extends Component {
 
   render() {
     // console.log('Props of signup', this.props);
-    const { error, isProgress, isLoggedIn } = this.props.signup;
+    const { error, isProgress, isLoggedIn } = this.props.auth;
     if (isLoggedIn) {
       return <Redirect to="/"></Redirect>;
     }

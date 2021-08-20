@@ -10,8 +10,9 @@ import {
 import jwtDecode from 'jwt-decode';
 
 import { fetchPosts } from '../Action/posts';
-import { Home, Navbar, Page404, Login, Signup, Settings } from './';
+import { Home, Navbar, Page404, Login, Signup, Settings, User } from './';
 import { authUser } from '../Action/auth';
+import { getToken } from '../Helpers/extraFunctions';
 
 const PrivateRoute = (privateProps) => {
   const { isLoggedIn, path, component: Component } = privateProps;
@@ -42,18 +43,18 @@ class App extends Component {
   componentDidMount() {
     this.props.dispatch(fetchPosts());
 
-    const token = localStorage.getItem('token');
+    const token = getToken();
 
     if (token) {
       const user = jwtDecode(token);
-      console.log('My User', user);
+      // console.log('My User', user);
       this.props.dispatch(authUser(user));
     }
   }
 
   render() {
     const { posts } = this.props;
-    console.log('Props', this.props);
+    // console.log('Props', this.props);
 
     return (
       <Router>
@@ -72,6 +73,12 @@ class App extends Component {
             exact
             path="/settings"
             component={Settings}
+            isLoggedIn={this.props.auth.isLoggedIn}
+          />
+          <PrivateRoute
+            exact
+            path="/user/:userId"
+            component={User}
             isLoggedIn={this.props.auth.isLoggedIn}
           />
           <Route component={Page404} />

@@ -49,9 +49,10 @@ class Login extends Component {
     const { error, isProgress, isLoggedIn } = this.props.auth;
     // console.log(isProgress);
 
-    console.log('Props of login', this.props);
-    const { from } = this.props.location.state || { pathname: '/' };
-    console.log('From', from);
+    // console.log('Props of login', this.props);
+    const from = (this.props.location.state &&
+      this.props.location.state.from) || { pathname: '/' };
+    // console.log('From', from);
 
     if (isLoggedIn) {
       return <Redirect to={from} />;

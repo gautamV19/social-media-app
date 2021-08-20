@@ -5,4 +5,6 @@ export const urls = {
   login: () => `${url_root}/users/login`,
   signupurl: () => `${url_root}/users/signup`,
   editUser: () => `${url_root}/users/edit`,
+  addfriend: (id) => `/friendship/create_friendship?user_id=${id}`,
+  userP: (id) => `/users/${id}`,
 };

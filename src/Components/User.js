@@ -25,7 +25,7 @@ class User extends Component {
     // console.log('Your user inside user component', user);
 
     if (inProccess) {
-      return <h1>Loading...</h1>;
+      return <h1>Loading..</h1>;
     }
 
     return (

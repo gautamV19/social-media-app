@@ -31,7 +31,7 @@ class User extends Component {
   }
 
   addFriend = async () => {
-    console.log('Add friend clicked');
+    // console.log('Add friend clicked');
 
     const userId = this.props.match.params.userId;
     const url = urls.addfriend(userId);
@@ -46,30 +46,55 @@ class User extends Component {
     const response = await fetch(url, options);
     const data = await response.json();
 
-    console.log('Add friend clicked', data);
+    // console.log('Add friend clicked', data);
 
     if (data.success) {
       this.setState({ success: true, successMsg: data.message });
       this.props.dispatch(addToYourFriend(data.data.friendship));
       return;
+    } else {
+      this.setState({
+        success: null,
+        error: data.message,
+      });
     }
-    this.setState = { success: false, error: data.message };
   };
-  removeFriend = () => {
+  removeFriend = async () => {
     const userId = this.props.match.params.userId;
     const url = urls.removefriend(userId);
+    const options = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+        Authorization: `Bearer ${getToken()}`,
+      },
+    };
+    const response = await fetch(url, options);
+    const data = await response.json();
+    console.log('Removed ', data);
+
+    if (data.success) {
+      this.setState({
+        success: true,
+        successMsg: data.message,
+      });
+      this.props.dispatch();
+    } else {
+    }
   };
 
   isFriend = () => {
     const userId = this.props.match.params.userId;
-    console.log('Inside isFriend', this.props.friends);
+    // console.log('Inside isFriend', this.props.friends);
 
-    this.props.friends.map((friend) => {
-      if (friend.to_user._id === userId) {
-        console.log('Inside isFriend', friend.to_user._id, userId);
-        return true;
-      }
-    });
+    const index = this.props.friends
+      .map((friend) => friend.to_user._id)
+      .indexOf(userId);
+
+    if (index !== -1) {
+      return true;
+    }
+
     return false;
   };
 
@@ -80,7 +105,7 @@ class User extends Component {
     // const { user } = this.props.location.state;
     // console.log('Your user inside user component', user);
 
-    const { success, error } = this.state;
+    const { successMsg, success, error } = this.state;
 
     const isMyFriend = this.isFriend();
     console.log('isMyFriend', isMyFriend);
@@ -116,9 +141,7 @@ class User extends Component {
           </button>
         )}
 
-        {success && (
-          <div className="alert success-dailog">{'Added to your friends'}</div>
-        )}
+        {success && <div className="alert success-dailog">{successMsg}</div>}
         {error && <div className="alert error-dailog">{error}</div>}
       </div>
     );

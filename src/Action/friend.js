@@ -1,6 +1,7 @@
 import {
   ADD_FRIEND_SUCCESSFUL,
   FETCH_FRIEND_SUCCESSFUL,
+  REMOVE_FRIEND_SUCCESSFUL,
   // FETCH_FRIEND_FAILED,
   // FETCH_FRIEND_STARTED,
 } from '../Action/actionTypes';
@@ -52,6 +53,13 @@ export const fechFriends = () => {
 export const addToYourFriend = (friend) => {
   return {
     type: ADD_FRIEND_SUCCESSFUL,
+    friend,
+  };
+};
+
+export const removeFriend = (friend) => {
+  return {
+    type: REMOVE_FRIEND_SUCCESSFUL,
     friend,
   };
 };

@@ -18,7 +18,8 @@ class User extends Component {
     super(props);
     this.state = {
       success: false,
-      error: null,
+      error: '',
+      successMsg: '',
     };
   }
 
@@ -44,8 +45,15 @@ class User extends Component {
     };
     const response = await fetch(url, options);
     const data = await response.json();
+
     console.log('Add friend clicked', data);
-    this.props.dispatch(addToYourFriend(data.data.friendship));
+
+    if (data.success) {
+      this.setState({ success: true, successMsg: data.message });
+      this.props.dispatch(addToYourFriend(data.data.friendship));
+      return;
+    }
+    this.setState = { success: false, error: data.message };
   };
   removeFriend = () => {
     const userId = this.props.match.params.userId;
@@ -54,9 +62,13 @@ class User extends Component {
 
   isFriend = () => {
     const userId = this.props.match.params.userId;
+    console.log('Inside isFriend', this.props.friends);
 
     this.props.friends.map((friend) => {
-      if (friend.to_user.id === userId) return true;
+      if (friend.to_user._id === userId) {
+        console.log('Inside isFriend', friend.to_user._id, userId);
+        return true;
+      }
     });
     return false;
   };
@@ -71,7 +83,7 @@ class User extends Component {
     const { success, error } = this.state;
 
     const isMyFriend = this.isFriend();
-
+    console.log('isMyFriend', isMyFriend);
     if (inProccess) {
       return <h1>Loading..</h1>;
     }
@@ -105,9 +117,9 @@ class User extends Component {
         )}
 
         {success && (
-          <div className="alert success-dialog">{'Added to your friends'}</div>
+          <div className="alert success-dailog">{'Added to your friends'}</div>
         )}
-        {error && <div className="alert error-dialog">{error}</div>}
+        {error && <div className="alert error-dailog">{error}</div>}
       </div>
     );
   }

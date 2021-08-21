@@ -5,11 +5,10 @@ import {
   ADD_FRIEND_SUCCESSFUL,
 } from '../Action/actionTypes';
 
-const intialState = [];
-export const friendship = (state = intialState, action) => {
+export const friendship = (state = [], action) => {
   switch (action.type) {
     case FETCH_FRIEND_SUCCESSFUL:
-      return action.friendlist;
+      return action.friendList;
 
     case ADD_FRIEND_SUCCESSFUL:
       return state.concat(action.friend);
@@ -17,6 +16,7 @@ export const friendship = (state = intialState, action) => {
     default:
       return state;
   }
+  return state;
 };
 // case FETCH_FRIEND_FAILED:
 //   return {

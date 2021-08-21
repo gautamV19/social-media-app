@@ -9,5 +9,5 @@ export const urls = {
   removefriend: (id) =>
     `${url_root}/friendship/remove_friendship?user_id=${id}`,
   userP: (id) => `${url_root}/users/${id}`,
-  fetchFriends: () => `${url_root}/friendship/fetch_user_friends`,
+  fetchFriendsurl: () => `${url_root}/friendship/fetch_user_friends`,
 };

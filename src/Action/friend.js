@@ -29,7 +29,7 @@ export const fetchFriendsSuc = (friendList) => {
 
 export const fechFriends = () => {
   return (dispatch) => {
-    const url = urls.fetchFriends();
+    const url = urls.fetchFriendsurl();
 
     fetch(url, {
       headers: {

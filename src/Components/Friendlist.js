@@ -13,7 +13,7 @@ export class Friendlist extends Component {
 
         {this.props.friends &&
           this.props.friends.map((friend) => (
-            <Friendlistitem friend={friend.to_user} key={friend._id} />
+            <Friendlistitem friend={friend.to_user} key={friend.to_user._id} />
           ))}
       </div>
     );

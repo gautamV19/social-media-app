@@ -52,9 +52,7 @@ class App extends Component {
       this.props.dispatch(authUser(user));
 
       //getting friends list
-      if (auth.isLoggedIn) {
-        this.props.dispatch(fechFriends());
-      }
+      this.props.dispatch(fechFriends());
     }
 
     // first upper dispatch should be occur and then this second

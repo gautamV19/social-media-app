@@ -9,6 +9,7 @@ function mapStateToProps(state) {
   return {
     user: state.userProfile.user,
     inProccess: state.userProfile.inProccess,
+    friends: state.friendship,
   };
 }
 
@@ -23,7 +24,7 @@ class User extends Component {
 
   componentDidMount() {
     const userId = this.props.match.params.userId;
-    console.log(userId);
+    // console.log(userId);
     this.props.dispatch(startUser());
     this.props.dispatch(userProfile(userId));
   }
@@ -35,6 +36,7 @@ class User extends Component {
     const url = urls.addfriend(userId);
 
     const options = {
+      method: 'POST',
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded',
         Authorization: `Bearer ${getToken()}`,
@@ -45,7 +47,19 @@ class User extends Component {
     console.log('Add friend clicked', data);
     this.props.dispatch(addToYourFriend(data.data.friendship));
   };
-  removeFriend = () => {};
+  removeFriend = () => {
+    const userId = this.props.match.params.userId;
+    const url = urls.removefriend(userId);
+  };
+
+  isFriend = () => {
+    const userId = this.props.match.params.userId;
+
+    this.props.friends.map((friend) => {
+      if (friend.to_user.id === userId) return true;
+    });
+    return false;
+  };
 
   render() {
     console.log('Props of user', this.props);
@@ -55,6 +69,8 @@ class User extends Component {
     // console.log('Your user inside user component', user);
 
     const { success, error } = this.state;
+
+    const isMyFriend = this.isFriend();
 
     if (inProccess) {
       return <h1>Loading..</h1>;
@@ -78,9 +94,15 @@ class User extends Component {
           <div className="field-value">{user.name}</div>
         </div>
 
-        <button className="button save-btn" onClick={this.addFriend}>
-          Add Friend
-        </button>
+        {isMyFriend ? (
+          <button className="button save-btn" onClick={this.removeFriend}>
+            Remove Friend
+          </button>
+        ) : (
+          <button className="button save-btn" onClick={this.addFriend}>
+            Add Friend
+          </button>
+        )}
 
         {success && (
           <div className="alert success-dialog">{'Added to your friends'}</div>

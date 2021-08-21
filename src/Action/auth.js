@@ -19,6 +19,7 @@ import {
   RESET_AUTH,
   EDIT_USER_SUCCESSFUL,
   EDIT_USER_FAILED,
+
 } from '../Action/actionTypes';
 import { urls } from '../Helpers/urls';
 import { getFormBody, getToken } from '../Helpers/extraFunctions';
@@ -74,27 +75,6 @@ export const signingup = () => {
     type: SIGNUP_START,
   };
 };
-
-// export function signup(name, email, password, confirm_password) {
-//   return (dispatch) => {
-//     const url = urls.signupurl();
-//     fetch(url, {
-//       method: 'POST',
-//       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-//       body: getFormBody({ email, password, confirm_password, name }),
-//     })
-//       .then((response) => response.json())
-//       .then((data) => {
-//         console.log(data);
-//         if (data.success) {
-//           localStorage.setItem('token', data.data.token);
-//           dispatch(signupSuccessful(data.data.user));
-//           return;
-//         }
-//         dispatch(signupFailed(data.message));
-//       });
-//   };
-// }
 
 export const signupSuccessful = (user) => {
   return {
@@ -183,7 +163,7 @@ export const updateProfile = (data) => {
       method: 'POST',
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded',
-        Authorization: 'Bearer ' + getToken(),
+        Authorization: `Bearer ${getToken()}`,
       },
       body: getFormBody(data),
     })
@@ -201,14 +181,3 @@ export const updateProfile = (data) => {
       });
   };
 };
-
-// {
-//     "success": true,
-//     "data": {
-//         "user": {
-//         "_id": "5e33fc7c9cd14572518c16fa",
-//         "name": "thor123",
-//         "email": "thor@gmail.com"
-//         }
-//     }
-// }

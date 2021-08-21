@@ -11,6 +11,7 @@ import jwtDecode from 'jwt-decode';
 
 import { fetchPosts } from '../Action/posts';
 import { Home, Navbar, Page404, Login, Signup, Settings, User } from './';
+import { fechFriends } from '../Action/friend';
 import { authUser } from '../Action/auth';
 import { getToken } from '../Helpers/extraFunctions';
 
@@ -42,18 +43,25 @@ const PrivateRoute = (privateProps) => {
 class App extends Component {
   componentDidMount() {
     this.props.dispatch(fetchPosts());
-
+    const { auth } = this.props;
     const token = getToken();
 
     if (token) {
       const user = jwtDecode(token);
       // console.log('My User', user);
       this.props.dispatch(authUser(user));
+
+      //getting friends list
+      if (auth.isLoggedIn) {
+        this.props.dispatch(fechFriends());
+      }
     }
+
+    // first upper dispatch should be occur and then this second
   }
 
   render() {
-    const { posts } = this.props;
+    const { posts, auth } = this.props;
     // console.log('Props', this.props);
 
     return (
@@ -64,7 +72,9 @@ class App extends Component {
             exact
             path="/"
             render={(props) => {
-              return <Home {...props} posts={posts} />;
+              return (
+                <Home {...props} posts={posts} isLoggedIn={auth.isLoggedIn} />
+              );
             }}
           />
           <Route exact path="/login" component={Login} />

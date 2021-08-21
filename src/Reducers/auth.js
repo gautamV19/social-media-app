@@ -75,7 +75,6 @@ export default function auth(state = intialAuthState, action) {
         error: action.error,
       };
     default:
-      break;
+      return state;
   }
-  return state;
 }

@@ -7,5 +7,17 @@ import Login from './Login';
 import Signup from './Signup';
 import Settings from './Settings';
 import User from './User';
+import CreatePost from './CreatePost';
 
-export { Navbar, PostsList, App, Home, Page404, Login, Signup, Settings, User };
+export {
+  Navbar,
+  PostsList,
+  App,
+  Home,
+  Page404,
+  Login,
+  Signup,
+  Settings,
+  User,
+  CreatePost,
+};

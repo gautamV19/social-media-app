@@ -1,5 +1,6 @@
+import { getFormBody, getToken } from '../Helpers/extraFunctions';
 import { urls } from '../Helpers/urls';
-import { UPDATE_POSTS } from './actionTypes';
+import { POST_CREATED, UPDATE_POSTS } from './actionTypes';
 
 export function fetchPosts() {
   return (dispatch) => {
@@ -18,5 +19,34 @@ export const updatePosts = (posts) => {
   return {
     type: UPDATE_POSTS,
     posts,
+  };
+};
+
+export const createPostSuccess = (post) => {
+  return {
+    type: POST_CREATED,
+    post,
+  };
+};
+
+export const createPost = (content) => {
+  return (dispatch) => {
+    const url = urls.createPost();
+
+    fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+        Authorization: `Bearer ${getToken()}`,
+      },
+      body: getFormBody({ content }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.success) {
+          dispatch(createPostSuccess(data.data.post));
+          return;
+        }
+      });
   };
 };

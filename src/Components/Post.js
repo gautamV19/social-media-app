@@ -1,8 +1,29 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { comment } from '../Action/posts';
+import Comment from './Comment';
+import { commentAction } from '../Action/posts';
+import { connect } from 'react-redux';
 
-export default class Post extends Component {
+class Post extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      comment: '',
+    };
+  }
+
+  enterComment = (e, postId) => {
+    // console.log(e.charCode);
+    if (e.target.value && e.charCode === 13) {
+      const { comment } = this.state;
+      console.log('pressed enter', comment);
+      const data = { post_id: postId, content: comment };
+      console.log('Comment', data);
+      this.props.dispatch(commentAction(data));
+      e.target.value = '';
+    }
+  };
+
   render() {
     const { post } = this.props;
     return (
@@ -50,16 +71,16 @@ export default class Post extends Component {
           <div className="post-comment-box">
             <input
               placeholder="Start typing a comment"
-              value={comment[posts.indexOf(post)]}
               onChange={(e) => {
-                this.setState(() => {
-                  comment[posts.indexOf(post)] = e.target.value;
-                });
+                this.setState({ comment: e.target.value });
               }}
               onKeyPress={(e) => {
                 this.enterComment(e, post._id);
               }}
             />
+            {post.comments.map((comment) => (
+              <Comment comment={comment} key={comment._id} />
+            ))}
           </div>
 
           <div className="post-comments-list">
@@ -78,3 +99,5 @@ export default class Post extends Component {
     );
   }
 }
+
+export default connect()(Post);

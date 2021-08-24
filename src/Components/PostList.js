@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import CreatePost from './CreatePost';
 import { connect } from 'react-redux';
-import { comment } from '../Action/posts';
+
 import Post from './Post';
 
 class PostsList extends Component {
@@ -13,19 +13,6 @@ class PostsList extends Component {
       comment: new Array(props.posts.length),
     };
   }
-
-  handleComment = () => {};
-
-  enterComment = (e, postId) => {
-    // console.log(e.charCode);
-    if (e.target.value && e.charCode === 13) {
-      console.log('pressed enter', e.target.value);
-      const data = { post_id: postId, content: e.target.value };
-      console.log('Comment', data);
-      this.props.dispatch(comment(data));
-      e.target.value = '';
-    }
-  };
 
   render() {
     const { posts } = this.props;

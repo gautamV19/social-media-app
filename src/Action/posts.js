@@ -59,10 +59,10 @@ export const commentedSuccesfully = (comment, post_id) => {
   };
 };
 
-export const comment = (data) => {
+export const commentAction = (data) => {
   return (dispatch) => {
     const url = urls.comment();
-
+    const post_id = data.post_id;
     fetch(url, {
       method: 'POST',
       headers: {
@@ -72,10 +72,10 @@ export const comment = (data) => {
       body: getFormBody(data),
     })
       .then((response) => response.json())
-      .then((data) => {
-        console.log(data);
-        if (data.success) {
-          dispatch(commentedSuccesfully(data.data.content, data.post_id));
+      .then((Data) => {
+        console.log(Data);
+        if (Data.success) {
+          dispatch(commentedSuccesfully(Data.data.comment, data.post_id));
         }
       });
   };

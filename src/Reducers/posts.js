@@ -7,14 +7,13 @@ export default function posts(state = [], action) {
     case POST_CREATED:
       return [action.post, ...state];
     case COMMENTED:
-      return [
-        ...state,
-        state.forEach((post) => {
-          if (post._id === action.post_id) {
-            post.comments.push(action.comment);
-          }
-        }),
-      ];
+      const newState = state.map((post) => {
+        if (post._id === action.post_id) {
+          return { ...post, comments: [action.comment, ...post.comments] };
+        }
+        return post;
+      });
+      return newState;
     default:
       return state;
   }

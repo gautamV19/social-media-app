@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { fetchFriendsStarted } from '../Action/friend';
 import Friendlistitem from './Friendlistitem';
 
 export class Friendlist extends Component {

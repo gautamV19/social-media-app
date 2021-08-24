@@ -11,7 +11,7 @@ import jwtDecode from 'jwt-decode';
 
 import { fetchPosts } from '../Action/posts';
 import { Home, Navbar, Page404, Login, Signup, Settings, User } from './';
-import { fechFriends } from '../Action/friend';
+import { fechFriends, fetchFriendsStarted } from '../Action/friend';
 import { authUser } from '../Action/auth';
 import { getToken } from '../Helpers/extraFunctions';
 
@@ -52,6 +52,7 @@ class App extends Component {
       this.props.dispatch(authUser(user));
 
       //getting friends list
+      // this.props.dispatch(fetchFriendsStarted());
       this.props.dispatch(fechFriends());
     }
 

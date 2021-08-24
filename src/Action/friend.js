@@ -57,7 +57,7 @@ export const addToYourFriend = (friend) => {
   };
 };
 
-export const removeFriend = (friend) => {
+export const removeFriendAction = (friend) => {
   return {
     type: REMOVE_FRIEND_SUCCESSFUL,
     friend,

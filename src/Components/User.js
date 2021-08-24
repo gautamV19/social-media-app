@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { addToYourFriend } from '../Action/friend';
+import { Redirect } from 'react-router-dom';
+import { addToYourFriend, removeFriendAction } from '../Action/friend';
 import { startUser, userProfile } from '../Action/profile';
 import { getToken } from '../Helpers/extraFunctions';
 import { urls } from '../Helpers/urls';
@@ -78,8 +79,14 @@ class User extends Component {
         success: true,
         successMsg: data.message,
       });
-      this.props.dispatch();
+      await this.props.dispatch(removeFriendAction(userId));
+      // this.forceUpdate();
+      return <Redirect to="/" />;
     } else {
+      this.setState({
+        success: null,
+        error: data.message,
+      });
     }
   };
 

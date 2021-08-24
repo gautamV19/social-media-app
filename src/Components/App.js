@@ -11,7 +11,7 @@ import jwtDecode from 'jwt-decode';
 
 import { fetchPosts } from '../Action/posts';
 import { Home, Navbar, Page404, Login, Signup, Settings, User } from './';
-import { fechFriends, fetchFriendsStarted } from '../Action/friend';
+import { fechFriends } from '../Action/friend';
 import { authUser } from '../Action/auth';
 import { getToken } from '../Helpers/extraFunctions';
 
@@ -43,7 +43,6 @@ const PrivateRoute = (privateProps) => {
 class App extends Component {
   componentDidMount() {
     this.props.dispatch(fetchPosts());
-    const { auth } = this.props;
     const token = getToken();
 
     if (token) {

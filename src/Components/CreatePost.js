@@ -11,7 +11,10 @@ class CreatePost extends Component {
   }
 
   addPostbtn = () => {
-    this.props.dispatch(createPost(this.state.content));
+    if (this.state.content) {
+      this.props.dispatch(createPost(this.state.content));
+      document.getElementById('postContent').value = '';
+    }
   };
 
   render() {
@@ -23,6 +26,7 @@ class CreatePost extends Component {
           onChange={(e) => {
             this.setState({ content: e.target.value });
           }}
+          id="postContent"
         ></textarea>
         <button id="add-post-btn" onClick={this.addPostbtn}>
           Add Post

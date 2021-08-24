@@ -11,4 +11,5 @@ export const urls = {
   userP: (id) => `${url_root}/users/${id}`,
   fetchFriendsurl: () => `${url_root}/friendship/fetch_user_friends`,
   createPost: () => `${url_root}/posts/create`,
+  comment: () => `${url_root}/comments`,
 };

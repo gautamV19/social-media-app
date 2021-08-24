@@ -1,6 +1,6 @@
 import { getFormBody, getToken } from '../Helpers/extraFunctions';
 import { urls } from '../Helpers/urls';
-import { POST_CREATED, UPDATE_POSTS } from './actionTypes';
+import { COMMENTED, POST_CREATED, UPDATE_POSTS } from './actionTypes';
 
 export function fetchPosts() {
   return (dispatch) => {
@@ -46,6 +46,36 @@ export const createPost = (content) => {
         if (data.success) {
           dispatch(createPostSuccess(data.data.post));
           return;
+        }
+      });
+  };
+};
+
+export const commentedSuccesfully = (comment, post_id) => {
+  return {
+    type: COMMENTED,
+    comment,
+    post_id,
+  };
+};
+
+export const comment = (data) => {
+  return (dispatch) => {
+    const url = urls.comment();
+
+    fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+        Authorization: `Bearer ${getToken()}`,
+      },
+      body: getFormBody(data),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
+        if (data.success) {
+          dispatch(commentedSuccesfully(data.data.content, data.post_id));
         }
       });
   };

@@ -2,10 +2,12 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { logout } from '../Action/auth';
 import { connect } from 'react-redux';
+import { searchAction } from '../Action/search';
 
 const mapStateToProps = (state) => {
   return {
     auth: state.auth,
+    results: state.search.results,
   };
 };
 
@@ -13,8 +15,14 @@ class Navbar extends Component {
   handleLogout = () => {
     this.props.dispatch(logout());
   };
+  handleSearch = (e) => {
+    // console.log(this.state.searchText);
+    // this.props.dispatch(searchAction(this.state.searchText));
+    this.props.dispatch(searchAction(e.target.value));
+  };
+
   render() {
-    const { auth } = this.props;
+    const { auth, results } = this.props;
     const user = auth.user;
     // console.log('Navbar props', this.props);
     return (
@@ -34,26 +42,38 @@ class Navbar extends Component {
             src="https://image.flaticon.com/icons/svg/483/483356.svg"
             alt="search-icon"
           />
-          <input placeholder="Search" />
+          <input
+            placeholder="Search"
+            onChange={this.handleSearch}
+            // value={this.state.searchText}
+            // onKeyPress={(e) => {
+            //   // console.log('key', e.key);
+            //   // console.log('code', e.code);
+            //   if (e.key === 'Enter') {
+            //     this.handleSearch();
+            //   }
+            // }}
+          />
 
-          <div className="search-results">
-            <ul>
-              <li className="search-results-row">
-                <img
-                  src="https://image.flaticon.com/icons/svg/2154/2154651.svg"
-                  alt="user-dp"
-                />
-                <span>John Doe</span>
-              </li>
-              <li className="search-results-row">
-                <img
-                  src="https://image.flaticon.com/icons/svg/2154/2154651.svg"
-                  alt="user-dp"
-                />
-                <span>John Doe</span>
-              </li>
-            </ul>
-          </div>
+          {results.length && (
+            <div className="search-results">
+              <ul>
+                {results.map((user) => {
+                  return (
+                    <li className="search-results-row" key={user._id}>
+                      <Link to={`/user/${user._id}`}>
+                        <img
+                          src="https://image.flaticon.com/icons/svg/2154/2154651.svg"
+                          alt="user-dp"
+                        />
+                        <span>{user.name}</span>
+                      </Link>
+                    </li>
+                  );
+                })}
+              </ul>
+            </div>
+          )}
         </div>
         <div className="right-nav">
           {auth.isLoggedIn && (

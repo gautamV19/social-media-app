@@ -14,4 +14,5 @@ export const urls = {
   comment: () => `${url_root}/comments`,
   like: (id, type) =>
     `${url_root}/likes/toggle?likeable_id=${id}&likeable_type=${type}`,
+  searchUrl: (text) => `${url_root}/users/search?text=${text}`,
 };

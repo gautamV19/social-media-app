@@ -31,6 +31,21 @@ class User extends Component {
     this.props.dispatch(userProfile(userId));
   }
 
+  componentDidUpdate(prevProps, prevState) {
+    const {
+      match: { params: prevParams },
+    } = prevProps;
+
+    const {
+      match: { params: currParams },
+    } = this.props;
+
+    if (prevParams && currParams && prevParams.userId !== currParams.userId) {
+      this.props.dispatch(startUser());
+      this.props.dispatch(userProfile(currParams.userId));
+    }
+  }
+
   addFriend = async () => {
     // console.log('Add friend clicked');
 
@@ -109,6 +124,7 @@ class User extends Component {
     console.log('Props of user', this.props);
     const { user, inProccess } = this.props;
     console.log('User Profile', { user, inProccess });
+    console.log('match params', this.props.match.params.userId);
     // const { user } = this.props.location.state;
     // console.log('Your user inside user component', user);
 

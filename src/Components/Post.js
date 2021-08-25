@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import Comment from './Comment';
-import { commentAction } from '../Action/posts';
+import { commentAction, likingAction } from '../Action/posts';
 import { connect } from 'react-redux';
 
 class Post extends Component {
@@ -24,8 +24,18 @@ class Post extends Component {
     }
   };
 
+  handleLike = () => {
+    const { auth } = this.props;
+    this.props.dispatch(
+      likingAction(this.props.post._id, 'Post', auth.user._id)
+    );
+  };
+
   render() {
     const { post } = this.props;
+    const { user } = this.props.auth;
+    const isLiked = post.likes.includes(user._id);
+
     return (
       <div className="post-wrapper" key={post._id}>
         <div className="post-header">
@@ -53,11 +63,20 @@ class Post extends Component {
 
           <div className="post-actions">
             <div className="post-like">
-              <img
-                src="https://image.flaticon.com/icons/svg/1077/1077035.svg"
-                alt="likes-icon"
-              />
-              <span>13</span>
+              <button className="post-like no-btn" onClick={this.handleLike}>
+                {isLiked ? (
+                  <img
+                    src="https://image.flaticon.com/icons/svg/1076/1076984.svg"
+                    alt="like post"
+                  />
+                ) : (
+                  <img
+                    src="https://image.flaticon.com/icons/svg/1077/1077035.svg"
+                    alt="likes-icon"
+                  />
+                )}
+              </button>
+              <span>{post.likes.length}</span>
             </div>
 
             <div className="post-comments-icon">
@@ -65,7 +84,7 @@ class Post extends Component {
                 src="https://image.flaticon.com/icons/svg/1380/1380338.svg"
                 alt="comments-icon"
               />
-              <span>7</span>
+              <span>{post.comments.length}</span>
             </div>
           </div>
           <div className="post-comment-box">
@@ -79,7 +98,13 @@ class Post extends Component {
               }}
             />
             {post.comments.map((comment) => (
-              <Comment comment={comment} key={comment._id} />
+              <Comment
+                comment={comment}
+                key={comment._id}
+                dispatch={this.props.dispatch}
+                userId={user._id}
+                post_id={post._id}
+              />
             ))}
           </div>
 
@@ -100,4 +125,10 @@ class Post extends Component {
   }
 }
 
-export default connect()(Post);
+function mapState(state) {
+  return {
+    auth: state.auth,
+  };
+}
+
+export default connect(mapState)(Post);

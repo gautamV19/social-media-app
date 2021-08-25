@@ -38,3 +38,7 @@ export const FETCH_FRIEND_STARTED = 'FETCH_FRIEND_STARTED';
 //create post
 export const POST_CREATED = 'POST_CREATED';
 export const COMMENTED = 'COMMENTED';
+export const LIKED = 'LIKED';
+
+//search
+export const SEARCH_SUCCESSFUL = 'SEARCH_SUCCESSFUL';

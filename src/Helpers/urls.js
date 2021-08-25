@@ -12,4 +12,6 @@ export const urls = {
   fetchFriendsurl: () => `${url_root}/friendship/fetch_user_friends`,
   createPost: () => `${url_root}/posts/create`,
   comment: () => `${url_root}/comments`,
+  like: (id, type) =>
+    `${url_root}/likes/toggle?likeable_id=${id}&likeable_type=${type}`,
 };

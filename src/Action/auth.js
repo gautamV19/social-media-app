@@ -19,7 +19,6 @@ import {
   RESET_AUTH,
   EDIT_USER_SUCCESSFUL,
   EDIT_USER_FAILED,
-
 } from '../Action/actionTypes';
 import { urls } from '../Helpers/urls';
 import { getFormBody, getToken } from '../Helpers/extraFunctions';

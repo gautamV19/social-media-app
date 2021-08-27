@@ -30,7 +30,7 @@ class Navbar extends Component {
         <div className="left-div">
           <Link to="/">
             <img
-              src="http://assets.stickpng.com/thumbs/58e9199beb97430e819064fc.png"
+              src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOEAAADhCAMAAAAJbSJIAAAATlBMVEX+hIT+TU3+ICC6AADbAABrAAD+OTn+XFxTAAD/iYn/YGBGAAD/Jib/U1NlCQn/PDxJBwfZBga9Bwf/Y2M+AABKAQFBCQn/KytiEBD/WFh9/p+fAAABJElEQVR4nO3c2RGCQAAFwVVRYeUQ8Mw/UWOw6n1o0ZNBJzClxOoubaprv4+VAxISEhISEhISEhISEhISEhISEhISEhISEhISEhISEhISEhISEhISEhISEhISEhISEhISEhISEhISEhISEhISEv6RsMt1u6d6PPtY5ZBrranWZo6VFNZzqtrkCgoXQkJCQkJCQkJCQkJCQkJCQkJCQkJCQkJCQkJCQkJCQkJCQkJCQkJCQkJCQkJCQkJCQkJCQkJCQkJCQkJCQsLv+1Hhkiv3VIgKx1ivKdd7iFWOscbpFGvYxSIkJCQkJCQkJCQkJCQkJCQkJCQkJCQkJCQkJCQkJCQkJCQkJCQkJCQkJCQkJCQkJCQkJCQkJCQkJCQkJCQkJNyi8AMB6Uq4qW2PYQAAAABJRU5ErkJggg=="
               alt="logo"
               style={{ height: '15%', width: '15%' }}
             />

@@ -30,7 +30,7 @@ class Navbar extends Component {
         <div className="left-div">
           <Link to="/">
             <img
-              src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOEAAADhCAMAAAAJbSJIAAAATlBMVEX+hIT+TU3+ICC6AADbAABrAAD+OTn+XFxTAAD/iYn/YGBGAAD/Jib/U1NlCQn/PDxJBwfZBga9Bwf/Y2M+AABKAQFBCQn/KytiEBD/WFh9/p+fAAABJElEQVR4nO3c2RGCQAAFwVVRYeUQ8Mw/UWOw6n1o0ZNBJzClxOoubaprv4+VAxISEhISEhISEhISEhISEhISEhISEhISEhISEhISEhISEhISEhISEhISEhISEhISEhISEhISEhISEhISEhISEv6RsMt1u6d6PPtY5ZBrranWZo6VFNZzqtrkCgoXQkJCQkJCQkJCQkJCQkJCQkJCQkJCQkJCQkJCQkJCQkJCQkJCQkJCQkJCQkJCQkJCQkJCQkJCQkJCQkJCQsLv+1Hhkiv3VIgKx1ivKdd7iFWOscbpFGvYxSIkJCQkJCQkJCQkJCQkJCQkJCQkJCQkJCQkJCQkJCQkJCQkJCQkJCQkJCQkJCQkJCQkJCQkJCQkJCQkJCQkJNyi8AMB6Uq4qW2PYQAAAABJRU5ErkJggg=="
+              src="https://image.flaticon.com/icons/png/512/336/336206.png"
               alt="logo"
               style={{ height: '15%', width: '15%' }}
             />
@@ -69,7 +69,7 @@ class Navbar extends Component {
             <div className="user">
               <Link to="/settings">
                 <img
-                  src="https://img-premium.flaticon.com/png/512/3006/premium/3006876.png?token=exp=1630072838~hmac=ff015ca60ab246db6d5600f6fa2eda20"
+                  src="https://image.flaticon.com/icons/png/128/709/709722.png"
                   alt="user-dp"
                   id="user-dp"
                 />

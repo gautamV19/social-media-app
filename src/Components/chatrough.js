@@ -2,6 +2,10 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import io from 'socket.io-client';
 import '../chat.css';
+import '../server';
+{
+  /* <script defer src="http://localhost:3000/socket.io/socket.io.js"></script>; */
+}
 
 class Chat extends Component {
   constructor(props) {
@@ -11,21 +15,20 @@ class Chat extends Component {
       messages: [], // {content: 'some message', self: true}
       typedMessage: '',
     };
+    this.socket = io('http://localhost:3000/');
+    this.userEmail = props.user.email;
 
-    // this.socket = io('http://localhost:3000/');
-    // this.userEmail = props.user.email;
-
-    // // console.log('Chat Props', props);
-    // if (this.userEmail) {
-    //   this.setupConnections();
-    // }
+    // console.log('Chat Props', props);
+    if (this.userEmail) {
+      this.setupConnections();
+    }
   }
 
-  // setupConnections = () => {
-  //   this.socket.on('chat-message', (data) => {
-  //     console.log(data);
-  //   });
-  // };
+  setupConnections = () => {
+    io.on('connection', (data) => {
+      console.log(data);
+    });
+  };
 
   // setupConnections = () => {
   //   console.log('connction request');
@@ -81,8 +84,8 @@ class Chat extends Component {
         <div className="chat-header">
           Chat
           <img
-            src="https://www.iconsdb.com/icons/preview/white/minus-5-xxl.png"
-            alt=""
+            src="https://image.flaticon.com/icons/png/128/992/992683.png"
+            alt="minus"
             height={17}
           />
         </div>
@@ -90,7 +93,7 @@ class Chat extends Component {
           {messages.map((message) => (
             <div
               className={
-                message.self
+                messages.self
                   ? 'chat-bubble self-chat'
                   : 'chat-bubble other-chat'
               }

@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 export default function Friendlistitem(props) {
-  console.log(props);
+  // console.log(props);
   return (
     <div>
       <Link className="friends-item" to={`/user/${props.friend._id}`}>

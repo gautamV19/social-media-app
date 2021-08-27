@@ -40,7 +40,7 @@ export const fechFriends = () => {
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log('Friend list Data', data);
+        // console.log('Friend list Data', data);
         if (data.success) {
           dispatch(fetchFriendsSuc(data.data.friends));
           return;

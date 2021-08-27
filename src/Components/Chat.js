@@ -105,7 +105,7 @@ class Chat extends Component {
             value={typedMessage}
             onChange={(e) => this.setState({ typedMessage: e.target.value })}
           />
-          <button onClick={this.handleSubmit}>Submit</button>
+          <button onClick={this.handleSubmit}>Sent</button>
         </div>
       </div>
     );

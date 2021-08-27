@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import Comment from './Comment';
 import { commentAction, likingAction } from '../Action/posts';
 import { connect } from 'react-redux';
+import { Imagesrc } from '../Helpers/extraFunctions';
 
 class Post extends Component {
   constructor(props) {
@@ -30,7 +31,6 @@ class Post extends Component {
       likingAction(this.props.post._id, 'Post', auth.user._id)
     );
   };
-
   render() {
     const { post } = this.props;
     const { user } = this.props.auth;
@@ -49,10 +49,7 @@ class Post extends Component {
               //   },
               // }}
             >
-              <img
-                src="https://image.flaticon.com/icons/svg/2154/2154651.svg"
-                alt="user-pic"
-              />
+              <img src={Imagesrc()} alt="user-pic" />
             </Link>
             <div>
               <span className="post-author">{post.user.name}</span>

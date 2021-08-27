@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import { addToYourFriend, removeFriendAction } from '../Action/friend';
 import { startUser, userProfile } from '../Action/profile';
-import { getToken } from '../Helpers/extraFunctions';
+import { getToken, Imagesrc } from '../Helpers/extraFunctions';
 import { urls } from '../Helpers/urls';
 
 function mapStateToProps(state) {
@@ -139,11 +139,7 @@ class User extends Component {
     return (
       <div className="settings">
         <div className="img-container">
-          <img
-            src="https://image.flaticon.com/icons/svg/2154/2154651.svg"
-            alt="user-dp"
-            id="user-dp"
-          />
+          <img src={Imagesrc()} alt="user-dp" id="user-dp" />
         </div>
         <div className="field">
           <div className="field-lable">Email</div>

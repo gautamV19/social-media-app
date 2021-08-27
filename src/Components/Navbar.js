@@ -30,7 +30,7 @@ class Navbar extends Component {
         <div className="left-div">
           <Link to="/">
             <img
-              src="https://image.flaticon.com/icons/png/512/1409/1409945.png"
+              src="http://assets.stickpng.com/thumbs/58e9199beb97430e819064fc.png"
               alt="logo"
               style={{ height: '15%', width: '15%' }}
             />
@@ -42,20 +42,9 @@ class Navbar extends Component {
             src="https://image.flaticon.com/icons/svg/483/483356.svg"
             alt="search-icon"
           />
-          <input
-            placeholder="Search"
-            onChange={this.handleSearch}
-            // value={this.state.searchText}
-            // onKeyPress={(e) => {
-            //   // console.log('key', e.key);
-            //   // console.log('code', e.code);
-            //   if (e.key === 'Enter') {
-            //     this.handleSearch();
-            //   }
-            // }}
-          />
+          <input placeholder="Search" onChange={this.handleSearch} />
 
-          {results.length && (
+          {results.length > 0 && (
             <div className="search-results">
               <ul>
                 {results.map((user) => {
@@ -80,7 +69,7 @@ class Navbar extends Component {
             <div className="user">
               <Link to="/settings">
                 <img
-                  src="https://image.flaticon.com/icons/svg/2154/2154651.svg"
+                  src="https://img-premium.flaticon.com/png/512/3006/premium/3006876.png?token=exp=1630072838~hmac=ff015ca60ab246db6d5600f6fa2eda20"
                   alt="user-dp"
                   id="user-dp"
                 />

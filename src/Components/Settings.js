@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { handleResetAuth, updateProfile } from '../Action/auth';
+import { Imagesrc } from '../Helpers/extraFunctions';
 
 function mapStateToProps(state) {
   return {
@@ -51,7 +52,7 @@ class Settings extends Component {
       <div className="settings">
         <div className="img-container">
           <img
-            src="https://image.flaticon.com/icons/svg/2154/2154651.svg"
+            src={'https://image.flaticon.com/icons/png/128/149/149071.png'}
             alt="user-dp"
             id="user-dp"
           />

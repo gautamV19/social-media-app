@@ -19,7 +19,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background: #eceffa;
+  background: rgb(255, 232, 236);
 }
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
@@ -195,13 +195,12 @@ code {
 /* NAVBAR */
 .nav {
   display: flex;
-  background: #6200ee;
+  background: pink;
   padding: 10px 20px;
   align-items: center;
   justify-content: space-between;
 }
 .logo {
-  color: #fff;
   font-size: 35px;
 }
 .logo-icons {
@@ -220,7 +219,7 @@ nav span {
 }
 nav .right-nav {
   display: flex;
-  color: #fff;
+  /* color: #fff; */
   font-style: normal;
   font-weight: bold;
   font-size: 16px;
@@ -235,13 +234,14 @@ nav .nav-links ul li {
 }
 nav .nav-links ul li a {
   text-decoration: none;
-  color: #fff;
+  color: #d63633;
 }
 nav .nav-links ul li a:hover {
   text-decoration: underline;
 }
 nav .nav-links ul li:hover {
   cursor: pointer;
+  color: white;
 }
 .search-container {
   flex-grow: 0.5;
@@ -364,7 +364,7 @@ nav .nav-links ul li:hover {
 .login-signup-header {
   font-weight: 600;
   font-size: 30px;
-  color: #ef7917;
+  color: #d63633;
 }
 .login-form {
   background-color: #fff;
@@ -397,7 +397,7 @@ nav .nav-links ul li:hover {
 .field button {
   width: 100%;
   margin-top: 20px;
-  background: #ef7917;
+  background: #d63633;
   border-radius: 2px;
   color: #fff;
   font-size: 20px;
@@ -447,18 +447,18 @@ nav .nav-links ul li:hover {
   outline: none;
 }
 .settings .edit-btn {
-  border: 1px solid #ef7917;
+  border: 1px solid pink;
   box-sizing: border-box;
-  color: #ef7917;
+  color: #d63633;
 }
 .settings .save-btn {
-  background: #ef7917;
+  background: #d63633;
   color: #fff;
   border: none;
   padding: 10px 20px;
 }
 .settings .go-back {
-  color: #ef7917;
+  color: #d63633;
   margin-top: 7px;
   font-size: 13px;
 }
@@ -509,7 +509,7 @@ nav .nav-links ul li:hover {
   height: 42px;
   left: 111.5px;
   top: 0px;
-  background: #ef7917;
+  background: #d63633;
   border-radius: 3px;
   color: #fff;
   font-size: 16px;

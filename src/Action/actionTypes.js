@@ -42,3 +42,7 @@ export const LIKED = 'LIKED';
 
 //search
 export const SEARCH_SUCCESSFUL = 'SEARCH_SUCCESSFUL';
+
+export const LIST_OF_LIKES = 'LIST_OF_LIKES';
+export const LIST_OF_COMMENTS = 'LIST_OF_COMMENTS';
+export const DELETE_COMMENT = 'DELETE_COMMENT';

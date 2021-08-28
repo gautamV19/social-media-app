@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { logout } from '../Action/auth';
 import { connect } from 'react-redux';
 import { searchAction } from '../Action/search';
+import { Imagesrc } from '../Helpers/extraFunctions';
 
 const mapStateToProps = (state) => {
   return {
@@ -36,13 +37,17 @@ class Navbar extends Component {
             />
           </Link>
         </div>
-        <div className="search-container">
+        <div className="search-container" style={{ borderRadius: '26px' }}>
           <img
             className="search-icon"
             src="https://image.flaticon.com/icons/svg/483/483356.svg"
             alt="search-icon"
           />
-          <input placeholder="Search" onChange={this.handleSearch} />
+          <input
+            placeholder="Search"
+            onChange={this.handleSearch}
+            style={{ borderRadius: '10px' }}
+          />
 
           {results.length > 0 && (
             <div className="search-results">
@@ -51,10 +56,7 @@ class Navbar extends Component {
                   return (
                     <li className="search-results-row" key={user._id}>
                       <Link to={`/user/${user._id}`}>
-                        <img
-                          src="https://image.flaticon.com/icons/svg/2154/2154651.svg"
-                          alt="user-dp"
-                        />
+                        <img src={Imagesrc()} alt="user-dp" />
                         <span>{user.name}</span>
                       </Link>
                     </li>

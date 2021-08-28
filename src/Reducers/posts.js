@@ -1,5 +1,6 @@
 import {
   COMMENTED,
+  DELETE_COMMENT,
   LIKED,
   POST_CREATED,
   UPDATE_POSTS,
@@ -19,6 +20,20 @@ export default function posts(state = [], action) {
         return post;
       });
       return newState;
+    case DELETE_COMMENT:
+      const newState123 = state.map((post) => {
+        if (post._id === action.post_id) {
+          post.comments.map((comment) => {
+            if (comment._id !== action.comment_id) {
+              return comment;
+            }
+          });
+          return post;
+        } else {
+          return post;
+        }
+      });
+      return newState123;
     case LIKED:
       if (action.likeable_type === 'Post') {
         const newState2 = state.map((post) => {

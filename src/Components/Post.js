@@ -1,7 +1,11 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import Comment from './Comment';
-import { commentAction, likingAction } from '../Action/posts';
+import {
+  commentAction,
+  likingAction,
+  listOfLikesAction,
+} from '../Action/posts';
 import { connect } from 'react-redux';
 import { Imagesrc } from '../Helpers/extraFunctions';
 
@@ -30,6 +34,14 @@ class Post extends Component {
     this.props.dispatch(
       likingAction(this.props.post._id, 'Post', auth.user._id)
     );
+  };
+
+  handleLikeList = (id) => {
+    let data = {
+      id,
+      type: 'Post',
+    };
+    this.props.dispatch(listOfLikesAction(data));
   };
   render() {
     const { post } = this.props;
@@ -73,7 +85,20 @@ class Post extends Component {
                   />
                 )}
               </button>
-              <span>{post.likes.length}</span>
+              <button
+                style={{
+                  backgroundColor: 'pink',
+                  border: '0',
+                  cursor: 'pointer',
+                  borderRadius: '10px',
+                  textAlign: 'center',
+                }}
+                onClick={() => {
+                  this.handleLikeList(post._id);
+                }}
+              >
+                <span>{post.likes.length}</span>
+              </button>
             </div>
 
             <div className="post-comments-icon">

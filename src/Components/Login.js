@@ -83,7 +83,7 @@ class Login extends Component {
             <button
               onClick={this.handleSubmit}
               disabled={isProgress}
-              style={{ backgroundColor: 'green' }}
+              style={{ backgroundColor: 'lightgreen' }}
             >
               Logging In...
             </button>

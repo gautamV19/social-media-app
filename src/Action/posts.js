@@ -1,6 +1,14 @@
 import { getFormBody, getToken } from '../Helpers/extraFunctions';
 import { urls } from '../Helpers/urls';
-import { COMMENTED, LIKED, POST_CREATED, UPDATE_POSTS } from './actionTypes';
+import {
+  COMMENTED,
+  DELETE_COMMENT,
+  LIKED,
+  LIST_OF_COMMENTS,
+  LIST_OF_LIKES,
+  POST_CREATED,
+  UPDATE_POSTS,
+} from './actionTypes';
 
 export function fetchPosts() {
   return (dispatch) => {
@@ -136,6 +144,78 @@ export const likingAction = (id, type, userId, forComment = 0) => {
             );
           }
           // likeStatus : false means disliked
+        }
+      });
+  };
+};
+
+export const listOfLikesActionSuccessful = (data) => {
+  return {
+    type: LIST_OF_LIKES,
+    likeList: data,
+  };
+};
+
+export const listOfCommentsActionSuccessful = (data) => {
+  return {
+    type: LIST_OF_COMMENTS,
+    commentsList: data,
+  };
+};
+
+export const listOfLikesAction = (data) => {
+  return (dispatch) => {
+    const url = urls.listOfLikesUrl(data.id, data.type);
+
+    fetch(url, {
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+        Authorization: `Bearer ${getToken()}`,
+      },
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log('Your list', data);
+        if (data.success) {
+          if (data.type === 'Post') {
+            dispatch(listOfLikesActionSuccessful(data.data));
+          }
+          if (data.type === 'Comment') {
+            dispatch(listOfCommentsActionSuccessful(data.data));
+          }
+        } else {
+          console.log(data.message);
+        }
+      });
+  };
+};
+
+export const commentDeleteSuccesful = (comment_id, post_id) => {
+  return {
+    type: DELETE_COMMENT,
+    comment_id,
+    post_id,
+  };
+};
+
+export const commentDeleteAction = (comment_id, post_id) => {
+  return (dispatch) => {
+    const url = urls.deleteCommentUrl(comment_id);
+
+    fetch(url, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+        Authorization: `Bearer ${getToken()}`,
+      },
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
+        if (data.success) {
+          dispatch(commentDeleteSuccesful(comment_id, post_id));
+        } else {
+          console.log(data.message);
         }
       });
   };

@@ -4,6 +4,7 @@ import auth from './auth';
 import userProfile from './userProfile';
 import { friendship } from './friend';
 import search from './search';
+import { likeComments } from './LikeAndComments';
 
 export default combineReducers({
   posts,
@@ -11,4 +12,5 @@ export default combineReducers({
   userProfile,
   friendship,
   search,
+  likeComments,
 });

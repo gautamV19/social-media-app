@@ -54,12 +54,12 @@ class Post extends Component {
           <div className="post-avatar">
             <Link
               to={`/user/${post.user._id}`}
-              // to={{
-              //   pathname: `/user/${post.user._id}`,
-              //   state: {
-              //     user: post.user,
-              //   },
-              // }}
+            // to={{
+            //   pathname: `/user/${post.user._id}`,
+            //   state: {
+            //     user: post.user,
+            //   },
+            // }}
             >
               <img src={Imagesrc()} alt="user-pic" />
             </Link>
@@ -128,18 +128,6 @@ class Post extends Component {
                 post_id={post._id}
               />
             ))}
-          </div>
-
-          <div className="post-comments-list">
-            <div className="post-comments-item">
-              <div className="post-comment-header">
-                <span className="post-comment-author">Bill</span>
-                <span className="post-comment-time">a minute ago</span>
-                <span className="post-comment-likes">22</span>
-              </div>
-
-              <div className="post-comment-content">Random comment</div>
-            </div>
           </div>
         </div>
       </div>

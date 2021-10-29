@@ -211,7 +211,7 @@ export const commentDeleteAction = (comment_id, post_id) => {
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
+        console.log("comment deleting...", data);
         if (data.success) {
           dispatch(commentDeleteSuccesful(comment_id, post_id));
         } else {

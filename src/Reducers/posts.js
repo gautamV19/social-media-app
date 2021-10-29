@@ -23,15 +23,12 @@ export default function posts(state = [], action) {
     case DELETE_COMMENT:
       const newState123 = state.map((post) => {
         if (post._id === action.post_id) {
-          post.comments.map((comment) => {
-            if (comment._id !== action.comment_id) {
-              return comment;
-            }
-          });
-          return post;
-        } else {
-          return post;
+          let newComments = post.comments.filter((comment) => {
+            return comment.id == action.comment_id;
+          })
+          return { ...post, comments: newComments };
         }
+        return post;
       });
       return newState123;
     case LIKED:

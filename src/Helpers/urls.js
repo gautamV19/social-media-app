@@ -1,23 +1,24 @@
 const url_root = 'http://codeial.codingninjas.com:8000/api/v2';
+const root = '/api/v1';
 export const urls = {
   fetchPosts: (page = 1, limit = 13) =>
-    `${url_root}/posts?page=${page}&limit=${limit}`,
-  login: () => `${url_root}/users/login`,
-  signupurl: () => `${url_root}/users/signup`,
+    `${root}/posts?page=${page}&limit=${limit}`,
+  login: () => `${root}/users/login`,
+  signupurl: () => `${root}/users/signup`,
   editUser: () => `${url_root}/users/edit`,
   addfriend: (id) => `${url_root}/friendship/create_friendship?user_id=${id}`,
   removefriend: (id) =>
     `${url_root}/friendship/remove_friendship?user_id=${id}`,
   userP: (id) => `${url_root}/users/${id}`,
   fetchFriendsurl: () => `${url_root}/friendship/fetch_user_friends`,
-  createPost: () => `${url_root}/posts/create`,
-  comment: () => `${url_root}/comments`,
+  createPost: () => `${root}/posts/create`,
+  comment: () => `${root}/comments`,
   like: (id, type) =>
     `${url_root}/likes/toggle?likeable_id=${id}&likeable_type=${type}`,
   searchUrl: (text) => `${url_root}/users/search?text=${text}`,
   listOfLikesUrl: (id, type) =>
     `${url_root}/likes?likeable_id=${id}&likeable_type=${type}`,
-  deleteCommentUrl: (id) => `${url_root}/comments?comment_id=${id}`,
+  deleteCommentUrl: (id) => `${root}/comments?comment_id=${id}`,
 };
 
 /*

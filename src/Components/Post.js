@@ -6,8 +6,10 @@ import {
   likingAction,
   listOfLikesAction,
 } from '../Action/posts';
+import { userProfile } from '../Action/profile';
 import { connect } from 'react-redux';
 import { Imagesrc } from '../Helpers/extraFunctions';
+import { urls } from '../Helpers/urls';
 
 class Post extends Component {
   constructor(props) {
@@ -53,15 +55,9 @@ class Post extends Component {
         <div className="post-header">
           <div className="post-avatar">
             <Link
-              to={`/user/${post.user._id}`}
-            // to={{
-            //   pathname: `/user/${post.user._id}`,
-            //   state: {
-            //     user: post.user,
-            //   },
-            // }}
+              to={`user/${post.user._id}`}
             >
-              <img src={Imagesrc()} alt="user-pic" />
+              <img src="https://t4.ftcdn.net/jpg/00/65/77/27/240_F_65772719_A1UV5kLi5nCEWI0BNLLiFaBPEkUbv5Fv.jpg" alt="user-pic" />
             </Link>
             <div>
               <span className="post-author">{post.user.name}</span>

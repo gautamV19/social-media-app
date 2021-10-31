@@ -5,19 +5,19 @@ export const urls = {
     `${root}/posts?page=${page}&limit=${limit}`,
   login: () => `${root}/users/login`,
   signupurl: () => `${root}/users/signup`,
-  editUser: () => `${url_root}/users/edit`,
-  addfriend: (id) => `${url_root}/friendship/create_friendship?user_id=${id}`,
+  editUser: () => `${root}/users/edit`,
+  addfriend: (id) => `${root}/friendship/create_friendship?user_id=${id}`,
   removefriend: (id) =>
-    `${url_root}/friendship/remove_friendship?user_id=${id}`,
-  userP: (id) => `${url_root}/users/${id}`,
-  fetchFriendsurl: () => `${url_root}/friendship/fetch_user_friends`,
+    `${root}/friendship/remove_friendship?user_id=${id}`,
+  userP: (id) => `${root}/users/${id}`,
+  fetchFriendsurl: () => `${root}/friendship/fetch_user_friends`,
   createPost: () => `${root}/posts/create`,
   comment: () => `${root}/comments`,
   like: (id, type) =>
-    `${url_root}/likes/toggle?likeable_id=${id}&likeable_type=${type}`,
-  searchUrl: (text) => `${url_root}/users/search?text=${text}`,
+    `${root}/likes/toggle?likeable_id=${id}&likeable_type=${type}`,
+  searchUrl: (text) => `${root}/users/search?text=${text}`,
   listOfLikesUrl: (id, type) =>
-    `${url_root}/likes?likeable_id=${id}&likeable_type=${type}`,
+    `${root}/likes?likeable_id=${id}&likeable_type=${type}`,
   deleteCommentUrl: (id) => `${root}/comments?comment_id=${id}`,
 };
 

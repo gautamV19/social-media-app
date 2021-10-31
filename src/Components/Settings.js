@@ -30,6 +30,8 @@ class Settings extends Component {
   saveSettings = () => {
     //{ name, password, confirm_password, id }
 
+    console.log("save settings");
+
     const { name, password, confirm_password } = this.state;
     if (password !== confirm_password) {
       alert('Please confirm password');

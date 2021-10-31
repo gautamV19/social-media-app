@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import { addToYourFriend, removeFriendAction } from '../Action/friend';
 import { startUser, userProfile } from '../Action/profile';
-import { getToken, Imagesrc } from '../Helpers/extraFunctions';
+import { getToken } from '../Helpers/extraFunctions';
 import { urls } from '../Helpers/urls';
 
 function mapStateToProps(state) {

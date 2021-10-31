@@ -158,6 +158,7 @@ export const updateProfile = (data) => {
   //{ name, password, confirm_password, id }
   return (dispatch) => {
     const url = urls.editUser();
+    console.log("inside updateProfile", data);
     fetch(url, {
       method: 'POST',
       headers: {

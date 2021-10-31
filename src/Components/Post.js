@@ -25,7 +25,7 @@ class Post extends Component {
       const { comment } = this.state;
       console.log('pressed enter', comment);
       const data = { post_id: postId, content: comment };
-      console.log('Comment', data);
+      console.log(postId, 'Comment', data);
       this.props.dispatch(commentAction(data));
       e.target.value = '';
     }

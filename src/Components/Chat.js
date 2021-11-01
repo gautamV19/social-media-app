@@ -1,88 +1,85 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import io from 'socket.io-client';
-import '../chat.css';
+import React, { Component } from "react";
+import io from "socket.io-client";
+import { connect } from "react-redux";
+import "../chat.css";
 
-class Chat extends Component {
+const CONNECTION_PORT = 4000;
+
+export class Chat extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      messages: [], // {content: 'some message', self: true}
-      typedMessage: '',
+      messages: [], // {content: "", self: true}
+      typedMessage: "",
     };
+    this.socket = io.connect("http://localhost:4000", {
+      transports: ["websocket"],
+    });
+    this.userEmail = props.user.email;
 
-    // this.socket = io('http://localhost:3000/');
-    // this.userEmail = props.user.email;
-
-    // // console.log('Chat Props', props);
-    // if (this.userEmail) {
-    //   this.setupConnections();
-    // }
+    if (this.userEmail) {
+      this.setupConnections();
+    }
   }
 
-  // setupConnections = () => {
-  //   this.socket.on('chat-message', (data) => {
-  //     console.log(data);
-  //   });
-  // };
+  setupConnections = () => {
+    const self = this;
+    this.socket.on("connect", function () {
+      console.log("connection established");
 
-  // setupConnections = () => {
-  //   console.log('connction request');
-  //   const thisSocket = this.socket;
-  //   const self = this;
+      self.socket.emit("join_room", {
+        user_email: self.userEmail,
+        chatroom: "socialapp",
+      });
 
-  //   this.socket.on('connect', () => {
-  //     console.log('CONNECTION ESTABLISHED');
+      self.socket.on("user_joined", function (data) {
+        console.log("NEW USER JOINED", data);
+      });
+    });
 
-  //     thisSocket.emit('join_room', {
-  //       user_email: this.userEmail,
-  //       chatroom: 'myApp1',
-  //     });
+    this.socket.on("receive_message", function (data) {
+      // add message to state
+      console.log("RECIEVE MESSAGE", data);
+      const { messages } = self.state;
 
-  //     thisSocket.on('user_joined', (data) => {
-  //       console.log('NEW USER JOINED', data);
-  //     });
-  //   });
+      const messageObj = {};
 
-  //   this.socket.on('recieve_message', (data) => {
-  //     const { messages } = self.state;
-  //     const messageObject = '';
-  //     messageObject.content = data.message;
+      messageObj.content = data.message;
 
-  //     if (data.user_email === self.props.user.email) {
-  //       messageObject.self = true;
-  //     }
+      if (data.user_email === self.userEmail) {
+        messageObj.self = true;
+      }
 
-  //     self.setState({
-  //       messages: [...messages, messageObject],
-  //       typedMessage: '',
-  //     });
-  //   });
-  // };
+      self.setState({
+        messages: [...messages, messageObj],
+        typedMessage: "",
+      });
+    });
+  };
 
-  handleSubmit = () => {
+  handleSendMsg = () => {
     const { typedMessage } = this.state;
+    console.log("sending message", typedMessage);
 
-    // if (typedMessage && this.userEmail) {
-    //   this.socket.on('send_message', {
-    //     message: typedMessage,
-    //     user_email: this.userEmail,
-    //     chatroom: 'myApp1',
-    //   });
-    // }
+    if (typedMessage && this.userEmail) {
+      this.socket.emit("send_message", {
+        message: typedMessage,
+        user_email: this.userEmail,
+      });
+    }
   };
 
   render() {
-    const { typedMessage, messages } = this.state;
+    const { messages, typedMessage } = this.state;
 
     return (
       <div className="chat-container">
         <div className="chat-header">
           Chat
           <img
-            src="https://www.iconsdb.com/icons/preview/white/minus-5-xxl.png"
-            alt=""
+            src="https://t3.ftcdn.net/jpg/03/73/49/86/240_F_373498649_nBxauQ0ipBSVrVcMpWWVmTpXu3BLvRyY.jpg"
+            alt="minus"
             height={17}
           />
         </div>
@@ -91,8 +88,8 @@ class Chat extends Component {
             <div
               className={
                 message.self
-                  ? 'chat-bubble self-chat'
-                  : 'chat-bubble other-chat'
+                  ? "chat-bubble self-chat"
+                  : "chat-bubble other-chat"
               }
             >
               {message.content}
@@ -102,20 +99,18 @@ class Chat extends Component {
         <div className="chat-footer">
           <input
             type="text"
-            value={typedMessage}
             onChange={(e) => this.setState({ typedMessage: e.target.value })}
+            value={typedMessage}
           />
-          <button onClick={this.handleSubmit}>Sent</button>
+          <button onClick={this.handleSendMsg}>Submit</button>
         </div>
       </div>
     );
   }
 }
 
-function mapStateToProps(state) {
-  return {
-    user: state.auth.user,
-  };
-}
+const mapStateToProps = ({ auth }) => ({
+  user: auth.user,
+});
 
 export default connect(mapStateToProps)(Chat);
